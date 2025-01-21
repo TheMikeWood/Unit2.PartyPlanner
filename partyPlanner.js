@@ -11,8 +11,8 @@ async function getEvents() {
   try {
     const response = await fetch(API_URL);
     if (response.ok) {
-      const data = await response.json();
-      state.events = data.data;
+      const json = await response.json();
+      state.events = json.data;
       renderEvents();
     } else {
       console.error("Failed to get events.");
@@ -63,7 +63,7 @@ function renderEvents() {
   state.events.forEach((event) => {
     const li = document.createElement("li");
     li.setAttribute("data-id", event.id);
-    li.textContent = `${event.name} - ${event.date} at ${event.location}. Description: ${event.description}`;
+    li.textContent = `${event.name} - ${event.date} at ${event.location}. Details: ${event.description}`;
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
